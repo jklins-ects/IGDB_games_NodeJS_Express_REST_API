@@ -7,10 +7,18 @@ const PORT = 3000;
 const express = require("express");
 const app = express();
 
-const gameRoutes = require("./routes/gamesRoutes");
+const gameRoutes = require("./routes/gameRoutes");
+const platformRoutes = require("./routes/platformsRoutes");
+const screenshotRoutes = require("./routes/screenshotsRoutes");
+const gameModeRoutes = require("./routes/gamemodeRoutes");
+const genreRoutes = require("./routes/genreRoutes");
 //const platformsRoutes = require("./routes/platformsRoutes")
 
 app.use("/api/games", gameRoutes);
+app.use("/api/platforms", platformRoutes);
+app.use("/api/screenshots", screenshotRoutes);
+app.use("/api/gamemodes", gameModeRoutes);
+app.use("/api/genres", genreRoutes);
 //app.use('/api/platforms', platformsRoutes);
 
 app.listen(PORT, () => {
