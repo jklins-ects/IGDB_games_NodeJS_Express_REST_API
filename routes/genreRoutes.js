@@ -4,7 +4,7 @@ const genreController = require("../controllers/genreController");
 
 /**
  * @swagger
- * /api/geres:
+ * /api/genres:
  *   get:
  *     tags:
  *       - genres
@@ -14,6 +14,8 @@ const genreController = require("../controllers/genreController");
  *           name: start
  *         - in: query
  *           name: limit
+ *         - in: query
+ *           name: gameid
  *     responses:
  *       200:
  *         description: A list of geres

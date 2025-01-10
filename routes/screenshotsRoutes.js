@@ -14,6 +14,8 @@ const screenshotController = require("../controllers/screenshotController");
  *           name: start
  *         - in: query
  *           name: limit
+ *         - in: query
+ *           name: gameid
  *     responses:
  *       200:
  *         description: A list of screenshots
