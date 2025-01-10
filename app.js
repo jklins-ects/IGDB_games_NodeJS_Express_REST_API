@@ -7,6 +7,10 @@ const PORT = 3000;
 const express = require("express");
 const app = express();
 
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger/swaggerConfig");
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 const gameRoutes = require("./routes/gameRoutes");
 const platformRoutes = require("./routes/platformsRoutes");
 const screenshotRoutes = require("./routes/screenshotsRoutes");
@@ -30,4 +34,5 @@ app.use("/api/similar", similarRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     console.log(`Try going to http://localhost:${PORT}/api/games`);
+    console.log(`Explorer http://localhost:${PORT}/api-docs/`);
 });
