@@ -5,7 +5,6 @@ async function getAllSimilarGames(start = 0, limit = 50, gameid) {
     if (gameid) {
         condition = db.format(` where g.game_id = ? `, [gameid]);
     }
-    console.log(gameid);
     const [rows] = await db.execute(
         `Select g.*, g2.game_id similar_game_id, g2.name similar_game_name, 
         g2.category similar_game_category, g2.summary similar_game_summary from games g 
