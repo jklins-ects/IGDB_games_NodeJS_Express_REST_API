@@ -1,12 +1,14 @@
 const db = require("../config/db");
 
-async function getAllScreenshots(start = 0, limit = 50, gameid) {
+async function getAllCharacters(start = 0, limit = 50, gameid) {
     let condition = ``;
+    let join = "";
     if (gameid) {
-        condition = db.format(` where game_id = ? `, [gameid]);
+        condition = db.format(` where gc.game_id = ? `, [gameid]);
+        join = `inner join game_characters gc on gc.characters_id = c.character_id`;
     }
     const [rows] = await db.execute(
-        `Select * from screenshots ${condition} Limit ?,?`,
+        `Select c.* from characters c ${join} ${condition} Limit ?,?`,
         [
             start.toString(), //tostring for workaround of mysql 8.4 bug
             limit.toString(),
@@ -15,12 +17,12 @@ async function getAllScreenshots(start = 0, limit = 50, gameid) {
     return rows;
 }
 
-async function getScreenshotById(screenshotId) {
+async function getCharacterById(characterId) {
     const [rows] = await db.execute(
-        "Select * from screenshots WHERE screenshot_id = ?",
-        [screenshotId]
+        "Select * from characters WHERE character_id = ?",
+        [characterId]
     );
     return rows[0];
 }
 
-module.exports = { getAllScreenshots, getScreenshotById };
+module.exports = { getAllCharacters, getCharacterById };

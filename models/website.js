@@ -1,12 +1,12 @@
 const db = require("../config/db");
 
-async function getAllScreenshots(start = 0, limit = 50, gameid) {
+async function getAllWebsites(start = 0, limit = 50, gameid) {
     let condition = ``;
     if (gameid) {
         condition = db.format(` where game_id = ? `, [gameid]);
     }
     const [rows] = await db.execute(
-        `Select * from screenshots ${condition} Limit ?,?`,
+        `Select * from websites ${condition} Limit ?,?`,
         [
             start.toString(), //tostring for workaround of mysql 8.4 bug
             limit.toString(),
@@ -15,12 +15,12 @@ async function getAllScreenshots(start = 0, limit = 50, gameid) {
     return rows;
 }
 
-async function getScreenshotById(screenshotId) {
+async function getWebsiteById(websiteId) {
     const [rows] = await db.execute(
-        "Select * from screenshots WHERE screenshot_id = ?",
-        [screenshotId]
+        "Select * from websites WHERE website_id = ?",
+        [websiteId]
     );
     return rows[0];
 }
 
-module.exports = { getAllScreenshots, getScreenshotById };
+module.exports = { getAllWebsites, getWebsiteById };
