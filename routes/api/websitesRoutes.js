@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const plaformController = require("../controllers/platformController");
+const websiteController = require("../../controllers/api/websiteController");
 
 /**
  * @swagger
- * /api/platforms:
+ * /api/websites:
  *   get:
  *     tags:
- *       - platforms
- *     summary: Get all characters (default to limit of 50)
+ *       - websites
+ *     summary: Get all websites (default to limit of 50)
  *     parameters:
  *         - in: query
  *           name: start
@@ -18,24 +18,24 @@ const plaformController = require("../controllers/platformController");
  *           name: gameid
  *     responses:
  *       200:
- *         description: A list of platforms
+ *         description: A list of websites
  */
-router.get("/", plaformController.getAllPlatforms);
+router.get("/", websiteController.getAllWebsites);
 
 /**
  * @swagger
- * /api/platforms/{id}:
+ * /api/websites/{id}:
  *   get:
  *     tags:
- *       - platforms
- *     summary: Get a platform by its id
+ *       - websites
+ *     summary: Get a website by its id
  *     parameters:
  *        - in: path
  *          name: id
  *     responses:
  *       200:
- *         description: A specific platform
+ *         description: A specific website
  */
-router.get("/:id", plaformController.getPlatformById);
+router.get("/:id", websiteController.getWebsiteById);
 
 module.exports = router;

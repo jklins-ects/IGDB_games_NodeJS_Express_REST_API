@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const genreController = require("../controllers/genreController");
+const gameModeController = require("../../controllers/api/gamemodeController");
 
 /**
  * @swagger
- * /api/genres:
+ * /api/gamemodes:
  *   get:
  *     tags:
- *       - genres
- *     summary: Get all geres (default to limit of 50)
+ *       - gamemodes
+ *     summary: Get all game modes (default to limit of 50)
  *     parameters:
  *         - in: query
  *           name: start
@@ -18,24 +18,24 @@ const genreController = require("../controllers/genreController");
  *           name: gameid
  *     responses:
  *       200:
- *         description: A list of geres
+ *         description: A list of gamemodes
  */
-router.get("/", genreController.getAllGenres);
+router.get("/", gameModeController.getAllGameModes);
 
 /**
  * @swagger
- * /api/genres/{id}:
+ * /api/gamemodes/{id}:
  *   get:
  *     tags:
- *       - genres
- *     summary: Get a genre by its id
+ *       - gamemodes
+ *     summary: Get a gamemode by its id
  *     parameters:
  *        - in: path
  *          name: id
  *     responses:
  *       200:
- *         description: A specific genre
+ *         description: A specific gamemode
  */
-router.get("/:id", genreController.getGenreById);
+router.get("/:id", gameModeController.getGameModeById);
 
 module.exports = router;

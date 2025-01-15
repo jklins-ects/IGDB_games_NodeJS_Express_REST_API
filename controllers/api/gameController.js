@@ -1,9 +1,10 @@
-const Game = require("../models/game");
+const Game = require("../../models/game");
 
 async function getAllGames(req, res) {
     try {
-        const { start = 0, limit = 50 } = req.query; //game?start=50&limit=30
-        const games = await Game.getAllGames(start, limit);
+        console.log(req.params);
+        const { start = 0, limit = 50, like } = req.query; //game?start=50&limit=30
+        const games = await Game.getAllGames(start, limit, like);
         res.status(200).json(games);
     } catch (err) {
         console.log(err);

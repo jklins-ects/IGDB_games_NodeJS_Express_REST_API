@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const websiteController = require("../controllers/websiteController");
+const coverController = require("../../controllers/api/coverController");
 
 /**
  * @swagger
- * /api/websites:
+ * /api/covers:
  *   get:
  *     tags:
- *       - websites
- *     summary: Get all websites (default to limit of 50)
+ *       - covers
+ *     summary: Get all covers (default to limit of 50)
  *     parameters:
  *         - in: query
  *           name: start
@@ -18,24 +18,24 @@ const websiteController = require("../controllers/websiteController");
  *           name: gameid
  *     responses:
  *       200:
- *         description: A list of websites
+ *         description: A list of covers
  */
-router.get("/", websiteController.getAllWebsites);
+router.get("/", coverController.getAllCovers);
 
 /**
  * @swagger
- * /api/websites/{id}:
+ * /api/covers/{id}:
  *   get:
  *     tags:
- *       - websites
- *     summary: Get a website by its id
+ *       - covers
+ *     summary: Get a cover by its id
  *     parameters:
  *        - in: path
  *          name: id
  *     responses:
  *       200:
- *         description: A specific website
+ *         description: A specific cover
  */
-router.get("/:id", websiteController.getWebsiteById);
+router.get("/:id", coverController.getCoverById);
 
 module.exports = router;
