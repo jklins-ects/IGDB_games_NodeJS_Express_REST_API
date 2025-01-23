@@ -15,6 +15,7 @@ const genreRoutes = require("./routes/genreRoutes");
 const characterRoutes = require("./routes/characterRoutes");
 const websitesRoutes = require("./routes/websitesRoutes");
 const similarRoutes = require("./routes/similarRoutes");
+const coverRoutes = require("./routes/coverRoutes");
 //const platformsRoutes = require("./routes/platformsRoutes")
 
 app.use("/api/games", gameRoutes);
@@ -25,6 +26,7 @@ app.use("/api/genres", genreRoutes);
 app.use("/api/characters", characterRoutes);
 app.use("/api/websites", websitesRoutes);
 app.use("/api/similar", similarRoutes);
+app.use("/api/covers", coverRoutes);
 //app.use('/api/platforms', platformsRoutes);
 
 app.listen(PORT, () => {
