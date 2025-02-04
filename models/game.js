@@ -1,10 +1,18 @@
 const db = require("../config/db");
 
-async function getAllGames(start = 0, limit = 50) {
-    const [rows] = await db.execute("Select * from games Limit ?,?", [
-        start.toString(), //tostring for workaround of mysql 8.4 bug
-        limit.toString(),
-    ]);
+async function getAllGames(start = 0, limit = 50, like) {
+    let where = "";
+    let params = [];
+    if (like) {
+        where = " where name like concat('%',?,'%')";
+        params.push(like);
+    }
+    params.push(start.toString());
+    params.push(limit.toString());
+    const [rows] = await db.execute(
+        `Select * from games ${where} limit ?,?`,
+        params
+    );
     return rows;
 }
 
