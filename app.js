@@ -3,6 +3,8 @@
 //Model - Represents the data and business logic (interactions with a database)
 //Controller - Handles logic for processing requests and orchestrating flow
 //View - is responsible for formatting the output - For this REST api, that will be json.
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger/swaggerConfig");
 const path = require("path");
 const settings = require("./config/settings");
 const express = require("express");
@@ -28,6 +30,7 @@ app.use("/api/characters", characterRoutes);
 app.use("/api/websites", websitesRoutes);
 app.use("/api/similar", similarRoutes);
 app.use("/api/covers", coverRoutes);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 //app.use('/api/platforms', platformsRoutes);
 
 const homeRoute = require("./routes/views/webpageRoutes");
@@ -39,5 +42,9 @@ app.set("views", path.join(__dirname, "views"));
 
 app.listen(settings.PORT, () => {
     console.log(`Server is running on port ${settings.PORT}`);
+    console.log(
+        `Swagger docs available at http://localhost:${settings.PORT}/api-docs`
+    );
     console.log(`Try going to ${settings.ROOT}:${settings.PORT}/api/games`);
+    console.log(`Webpage at http://localhost:${settings.PORT}/`);
 });

@@ -5,17 +5,24 @@ async function renderGamePage(req, res) {
         `${settings.ROOT}:${settings.PORT}/api/games/${req.params.id}`
     );
     data = response.data;
-    const cover = await axios.get(
-        `${settings.ROOT}:${settings.PORT}/api/covers`,
-        {
-            params: { gameid: req.params.id },
-        }
-    );
-    data.cover = cover.data[0] ? cover.data[0].url : "";
+    const cover = await endPointWithGameID("covers", req.params.id);
+    data.cover = cover[0] ? cover[0].url : "";
 
+    data.genres = await endPointWithGameID("genres", req.params.id);
     res.render("game", {
         title: "Games!",
         gameData: data,
     });
 }
+
+async function endPointWithGameID(endpoint, gameId) {
+    const values = await axios.get(
+        `${settings.ROOT}:${settings.PORT}/api/${endpoint}`,
+        {
+            params: { gameid: gameId },
+        }
+    );
+    return values.data;
+}
+
 module.exports = { renderGamePage };

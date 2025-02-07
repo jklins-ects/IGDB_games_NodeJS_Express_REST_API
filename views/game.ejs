@@ -1,12 +1,5 @@
 <%- include('partials/header.ejs') %>
-<nav class="navbar navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="./">
-        <img src="/images/IGDBSearchLogo.svg" alt="" width="30" height="24">
-        Search All Games
-      </a>
-    </div>
-  </nav>
+
 <div class="container mt-5  overflow-hidden px-4" id="gameContainer">
     <div class="row gx-5">
         <div class="col-md-4">
@@ -25,8 +18,14 @@
         <div class="col-md-4">
             <div class="p-3">
                 <h2>Genres</h2>
+                <% if(!gameData.genres || gameData.genres.length == 0){%>
                 <div class="no-data"><p>No data found</p></div>
-                <ul id="gameGenres"></ul>
+                <%}%>
+                <ul id="gameGenres">
+                    <% for(let genre of gameData.genres) { %>
+                        <li><%=genre.name%></li>
+                    <%}%>
+                </ul>
             </div>        
         </div>
         <div class="col-md-4">
