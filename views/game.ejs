@@ -31,15 +31,27 @@
         <div class="col-md-4">
             <div class="p-3">
                 <h2>Game Modes</h2>
-                <div class="no-data"><p>No data found</p></div>
-                <ul id="gameModes"></ul>
+                <% if(!gameData.gamemodes || gameData.gamemodes.length == 0){%>
+                    <div class="no-data"><p>No data found</p></div>
+                    <%}%>
+                    <ul id="gameModes">
+                        <% for(let gamemode of gameData.gamemodes) { %>
+                            <li><%=gamemode.name%></li>
+                        <%}%>
+                    </ul>
             </div>
         </div>
         <div class="col-md-4">
             <div class="p-3">
                 <h2>Platforms</h2>
-                <div class="no-data"><p>No data found</p></div>
-                <ul id="gamePlatforms"></ul>
+                <% if(!gameData.platforms || gameData.platforms.length == 0){%>
+                    <div class="no-data"><p>No data found</p></div>
+                    <%}%>
+                    <ul id="gamePlatforms">
+                        <% for(let platform of gameData.platforms) { %>
+                            <li><%=platform.name%></li>
+                        <%}%>
+                    </ul>
             </div>
 
         </div>
@@ -48,10 +60,14 @@
         <div class="col-md-12">
             <div class="p-3">
                 <h2>Characters</h2>
-                <div class="no-data"><p>No data found</p></div>
-                <div id="gameCharacters">
-    
-                </div>
+                <% if(!gameData.characters || gameData.characters.length == 0){%>
+                    <div class="no-data"><p>No data found</p></div>
+                    <%}%>
+                    <ul id="gamePlatforms">
+                        <% for(let character of gameData.characters) { %>
+                            <li><%=character.name%></li>
+                        <%}%>
+                    </ul>
             </div>
         </div>
     </div>
@@ -59,10 +75,14 @@
         <div class="col-md-12">
             <div class="p-3">
                 <h2>Websites</h2>
-                <div class="no-data"><p>No data found</p></div>
-                <div id="gameWebsites">
-    
-                </div>
+                <% if(!gameData.websites || gameData.websites.length == 0){%>
+                    <div class="no-data"><p>No data found</p></div>
+                    <%}%>
+                    <ul id="gameWebsites">
+                        <% for(let website of gameData.websites) { %>
+                            <li><a href="<%=website.url%>" target="_blank"><%=website.url%></a></li>
+                        <%}%>
+                    </ul>
             </div>
         </div>
     </div>
@@ -70,8 +90,13 @@
         <div class="col-md-12">
             <div class="p-3">
                 <h2>Screenshots</h2>
+                <% if(!gameData.screenshots || gameData.screenshots.length == 0){%>
                 <div class="no-data"><p>No data found</p></div>
+                <%}%>
                 <div id="gameScreenshots" class="row">
+                    <% for(let screenshot of gameData.screenshots) { %>
+                        <div class="col-md-4"><img class="w-100 p-3" src="<%=screenshot.url.replace("t_thumb", "t_720p")%>"></div>
+                    <%}%>
                 </div>
             </div>
         </div>
@@ -80,8 +105,28 @@
         <div class="col-md-12">
             <div class="p-3">
                 <h2>Similar Games</h2>
-                <div class="no-data"><p>No data found</p></div>
-                <div id="gameSimilar"></div>
+                <% if(!gameData.screenshots || gameData.screenshots.length == 0){%>
+                    <div class="no-data"><p>No data found</p></div>
+                    <%}%>
+                <div id="gameSimilar">
+                    <% for(let game of gameData.similar) { %>
+                        <a href="/game/<%=game.similar_game_id%>" class="unstyled-link text-decoration-none">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img src="<%=game.similar_game_cover.replace("t_thumb", "t_720p")%>" alt="" class="card-img">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><%=game.similar_game_name%></h5>
+                                            <p class="card-text"><%=game.similar_game_summary%></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <% } %>
+                </div>
             </div>
         </div>
     </div>
